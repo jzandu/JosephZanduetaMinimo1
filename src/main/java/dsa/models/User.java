@@ -10,7 +10,6 @@ public class User {
 
     //Empty constructor for json
     public User(){
-
     }
 
     public User(String id, String name, String surname) {
@@ -42,6 +41,10 @@ public class User {
         return itemList;
     }
 
+    public String getListObjects(){
+        return this.itemList.toString();
+    }
+
     public void setItemList(LinkedList<Item> itemList) {
         this.itemList = itemList;
     }
@@ -61,5 +64,9 @@ public class User {
 
     public void setId(String i){
         this.id=i;
+    }
+    public String verInfo(){
+        return ("["+this.id+", "+this.name+", "+this.surname+"]");
+
     }
 }

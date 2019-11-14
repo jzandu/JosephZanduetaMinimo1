@@ -7,4 +7,26 @@ Añadida Estructura de proyecto Maven y editado el pom.xml para incluir swagger 
 Añadido log.properties para deifinir el formato de logger.
 
 #SortbyName
-Como los Hasmap no se pueden ordenar, he copiado sus valores en cun arrayList
+Como los Hasmap no se pueden ordenar, he copiado sus valores en un arrayList
+
+#addUser()
+Cambiado para que sea mas sencillo añadir un usuario, en vez de hacerlo en dos paso. Se comprueba que no está registrado ya
+
+#updateUser()
+Está hecho para modificar un valor de un usuario
+Se tiene que crear un usuario antes con los valores modificados y si existe esa clave, lo actualiza y borra. Si no, saldrá excepción
+
+#size()
+Consulta el numero de usuarios
+
+#SeeUser()
+Lo he cambiado para que en vez de introducir un usuario, sea la clave del mapa y te devuelve un string con la informacion al respecto si está registrado.
+
+#addItemToUser()
+Añade un item ya un usuario dando la key del HashMap, si no existe salta la excepción
+
+#getObjectUser()
+Devuelve una lista con los objectos de un usuario en un metodo definido en Item. Si no existe el usario, excepcion
+
+#sizeItemListUser()
+Entra en un bucle guardando en un int auxiliar todas las cantidades de la lista de item de un usuario

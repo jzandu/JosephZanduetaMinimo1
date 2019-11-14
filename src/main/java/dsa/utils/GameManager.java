@@ -7,10 +7,20 @@ import java.util.List;
 
 public interface GameManager {
     List<User> sortByName();
-    void addUser(User u);
+
+    void addUser(String i, String n, String a);
+
     void updateUser(User u) throws UserNotFoundException;
+
     int sizeUsers();
-    List<User> seeUser(User u);
-    void addItem(Item i1);
+
+    String seeUser(String u);
+
+    void addItemToUser(String id, Item i2) throws UserNotFoundException;
+
+    String getObjectsUser(User u) throws UserNotFoundException;
+
     void clear();
+
+    int sizeItemListUser();
 }
