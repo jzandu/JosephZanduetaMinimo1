@@ -29,46 +29,8 @@ public class GameManagerImp implements GameManager{
         return instance;
     }
 
-    public void clear(){
-        this.instance = null;
-        this.users.clear();
-        this.listItem.clear();
-    }
-
-    @Override
-    public int sizeItemListUser() {
-        int aux= 0;
-        for (int i=0; i<this.listItem.size(); i++) {
-            aux += this.listItem.get(i).getCantidad();
-        } return aux;
-    }
-
 
     /*MÉTODOS*/
-    public void addItemToUser(String id, Item i2) throws UserNotFoundException{
-        User u1 =users.get(id);
-            if (u1 != null) {
-                u1.addItem(i2);
-                log.info("Añadido "+i2+" a "+u1);
-            }
-            else{
-                log.error("Usuario no existe");
-                throw new UserNotFoundException();
-            }
-
-    }
-
-    @Override
-    public String getObjectsUser(User u) throws UserNotFoundException{
-        User aux = this.users.get(u.getId());
-        if (aux != null){
-            aux.getListObjects();
-        }
-
-
-        return null;
-    }
-
     public List<User> sortByName() {
         List<User>listaU = new LinkedList<>(this.users.values());
         log.info("Valor en lista"+listaU);
@@ -82,30 +44,7 @@ public class GameManagerImp implements GameManager{
         return(listaU);
 
     }
-    @Override
-    public int sizeUsers(){
-        log.info("Tamaño: " + this.users.size());
-        return this.users.size();
-    }
 
-    @Override
-    public String seeUser(String aux2) {
-        //Introducimos la clave y nos da la info
-        User theUser = this.users.get(aux2);
-        if (theUser != null) {
-            String res = theUser.verInfo();
-            log.info(res);
-            return res;
-        }else log.warn("Usuario no encontrado");
-        return null;
-    }
-    /*public void addUser(Usuario u){
-        usuarios.put(u.getId(), new Usuario(u.getName(), u.getSurname()));
-        log.info("Usuario añadido: " + this.usuarios.get(u.getId()));
-    }*/
-
-
-    @Override
     public void addUser(String id, String nombre, String apellido) {
         User u2 = new User(id, nombre, apellido);
         User result = users.get(u2);
@@ -117,7 +56,9 @@ public class GameManagerImp implements GameManager{
 
         }
     }
-    @Override
+
+
+
     public void updateUser(User u) throws UserNotFoundException {
         User theUser = this.users.get(u);
         if (theUser != null) {
@@ -130,6 +71,60 @@ public class GameManagerImp implements GameManager{
 
         }
 
+    }
+
+    public int sizeUsers(){
+        log.info("Tamaño: " + this.users.size());
+        return this.users.size();
+    }
+
+
+    public String seeUser(String aux2) {
+        //Introducimos la clave y nos da la info
+        User theUser = this.users.get(aux2);
+        if (theUser != null) {
+            String res = theUser.verInfo();
+            log.info(res);
+            return res;
+        }else log.warn("Usuario no encontrado");
+        return null;
+    }
+
+
+
+    public void addItemToUser(String id, Item i2) throws UserNotFoundException{
+        User u1 =users.get(id);
+            if (u1 != null) {
+                u1.addItem(i2);
+                log.info("Añadido "+i2+" a "+u1);
+            }
+            else{
+                log.error("Usuario no existe");
+                throw new UserNotFoundException();
+            }
+
+    }
+
+    public String getObjectsUser(User u) throws UserNotFoundException{
+        User aux = this.users.get(u.getId());
+        if (aux != null){
+            aux.getListObjects();
+        }
+        return null;
+    }
+
+    public int sizeItemListUser() {
+        int aux= 0;
+        for (int i=0; i<this.listItem.size(); i++) {
+            aux += this.listItem.get(i).getCantidad();
+        } return aux;
+    }
+
+
+    public void clear(){
+        instance = null;
+        this.users.clear();
+        this.listItem.clear();
     }
 
     public HashMap<String, User> allUsers(){
