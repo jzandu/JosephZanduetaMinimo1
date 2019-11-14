@@ -13,33 +13,33 @@ import static org.junit.Assert.assertEquals;
 
 public class TestImp {
 
-    static GameManager p1;
+    //private GameManager p1 --------- Es lo que daba error
+    GameManager p1;
 
     @Before
     public void setUp() throws UserNotFoundException {
 
-        GameManager p1 = GameManagerImp.getInstance();
+        p1 = GameManagerImp.getInstance();
 
         Item i1;
 
-        p1.addUser("1234", "Pedro", "Lopez");
-        p1.addUser("1345","Juan", "Lopez");
-        p1.addUser("1125","Ana", "Lopez");
+        p1.addUser("1234", "Pedro", "Zaranjuez");
+        p1.addUser("1345","Juan", "Polonesa");
+        p1.addUser("1125","Ana", "Aviles");
 
 
         i1 = new Item("Escudo", 2);
         p1.addItemToUser("1234",i1);
         i1 = new Item("Arma", 1);
         p1.addItemToUser("1345",i1);
-        i1 = new Item("Moneda", 4);
-        p1.addItemToUser("1125",i1);
+
 
 
 
 
     }
-    @AfterClass
-    public static void tearDown(){
+    @After
+    public void tearDown(){
         p1.clear();
     }
 
@@ -47,9 +47,9 @@ public class TestImp {
     public void sortByName() {
         List<User> list1 = new LinkedList<>();
         list1=this.p1.sortByName();
-        assertEquals(list1.get(0).getName(), "Ana", "Ana");
-        assertEquals(list1.get(1).getName(), "Juan", "Juan");
-        assertEquals(list1.get(2).getName(), "Pedro", "Pedro");
+        assertEquals(list1.get(0).getSurname(), "Aviles", "Aviles");
+        assertEquals(list1.get(1).getSurname(), "Polonesa", "Polonesa");
+        assertEquals(list1.get(2).getSurname(), "Zaranjuez", "Zaranjuez");
 
     }
 
@@ -62,16 +62,14 @@ public class TestImp {
 
 
     @Test
-    public void seeUser() {
+    public void itemUserTest() throws UserNotFoundException {
+        Item i1 = new Item("Moneda", 4);
+        User uf = new User("1","Joseph","Zandueta");
+        p1.sizeItemListUser(uf);
+
+
     }
 
-    @Test
-    public void addUser() {
-    }
-
-    @Test
-    public void updateUser() {
-    }
 
 
 }

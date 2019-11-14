@@ -37,7 +37,7 @@ public class GameManagerImp implements GameManager{
         Collections.sort(listaU, new Comparator<User>() {
             @Override
             public int compare(User user, User t1) {
-                return user.getName().compareTo(t1.getName());
+                return user.getSurname().compareTo(t1.getSurname());
             }
         });
         log.info("Lista ordenada "+listaU);
@@ -47,14 +47,14 @@ public class GameManagerImp implements GameManager{
 
     public void addUser(String id, String nombre, String apellido) {
         User u2 = new User(id, nombre, apellido);
-        User result = users.get(u2);
+        /*User result = users.get(u2);
         if (result == null) {
-            users.put(u2.getId(), u2);
+            */users.put(u2.getId(), u2);
             log.info("Añadido nuevo usuario "+users);
-        } else {
+        /*} else {
             log.warn("The user " + u2.getName() + " existe");
 
-        }
+        }*/
     }
 
 
@@ -113,18 +113,20 @@ public class GameManagerImp implements GameManager{
         return null;
     }
 
-    public int sizeItemListUser() {
+    public int sizeItemListUser(User u) {
         int aux= 0;
-        for (int i=0; i<this.listItem.size(); i++) {
-            aux += this.listItem.get(i).getCantidad();
+        List<Item> listItem = u.getItemList();
+        for (int i=0; i<listItem.size(); i++) {
+            aux += listItem.get(i).getCantidad();
+            log.info("Cantidad de objetos"+ aux);
         } return aux;
     }
 
 
     public void clear(){
         instance = null;
-        this.users.clear();
-        this.listItem.clear();
+        this.users =null;
+        this.listItem = null;
     }
 
     public HashMap<String, User> allUsers(){

@@ -23,7 +23,7 @@ public interface GameManager {
 
     void clear();
 
-    int sizeItemListUser();
+    int sizeItemListUser(User u);
 
     public HashMap<String, User> allUsers();
 }

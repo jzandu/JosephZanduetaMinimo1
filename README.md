@@ -35,3 +35,6 @@ Entra en un bucle guardando en un int auxiliar todas las cantidades de la lista 
 Pienso que tengo todo bien pero no hace mas que salirme un nullPointerExc... al hacer debug me sale como que la instancia p1 es null pero no lo entiendo porque, si al hacer logger se van añadiendo los objetos y no da error en eso.
 
 He añadido varias funciones de la API pero tengo en cuenta que debería salir el test
+
+#Actualizado
+Ya he hallado por qué me salía mal, sólo había que quitar el atributo privado de GamenManager en el Test
