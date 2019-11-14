@@ -1,6 +1,6 @@
 package dsa.services;
 
-import edu.upc.eetac.dsa.*;
+import dsa.models.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -12,14 +12,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.LinkedList;
 
-@Api(value = "/electricalbikes", description = "Endpoint to Text Service")
+@Api(value = "/GameManager", description = "Endpoint to Text Service")
 @Path("/bikes")
 public class Service {
 
-    private MyBike mb;
+    private GameManager mb;
 
     public Service(){
-        this.mb = MyBikeImpl.getInstance();
+        this.mb = GameManagerImpl.getInstance();
     }
 
     @POST
@@ -29,35 +29,32 @@ public class Service {
     })
     @Path("/adduser")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addUser(User u) {
-        String idUser = u.getIdUser();
-        String name = u.getName();
-        String surname = u.getSurname();
-        this.mb.addUser(idUser, name, surname);
+
+    public Response addUser(User s1) {
+        String idUser = s1.getId();
+        String name = s1.getName();
+        String surname = s1.getSurname();
+        this.mb.addUser(id, name, surname);
 
         return Response.status(201).build();
     }
 
     @POST
-    @ApiOperation(value = "add station", notes = "x")
+    @ApiOperation(value = "update User", notes = "x")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful")
     })
-    @Path("/addstation")
+    @Path("/updateuser")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addStation(Station s) {
-        String idStation = s.getIdStation();
-        String description = s.getDescription();
-        int max = s.getMax();
-        double lat = s.getLat();
-        double lon = s.getLon();
-        this.mb.addStation(idStation, description, max, lat, lon);
+    public Response updateUser(User s) {
+        String id = s.getId();
+        this.mb.addUser(id, name, surname);
 
         return Response.status(201).build();
     }
 
     @POST
-    @ApiOperation(value = "add bike", notes = "x")
+    @ApiOperation(value = "modificar usuario", notes = "x")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful"),
             @ApiResponse(code = 404, message = "StationFullException"),
@@ -65,14 +62,11 @@ public class Service {
     })
     @Path("/addbike")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addBike(Bike b) {
-        String idBike = b.getIdBike();
-        String description = b.getDescription();
-        double kms = b.getKms();
-        String idStation = b.getIdStation();
-
+    public Response updateUser(User b) {
+        String id = b.getId();
+        String name = b.getName();
         try {
-            this.mb.addBike(idBike, description, kms, idStation);
+            this.mb.addBike(id, name, surname);
             return Response.status(201).build();
         } catch (StationFullException e) {
             e.printStackTrace();
@@ -125,20 +119,34 @@ public class Service {
         }
     }
 
-    @GET
-    @ApiOperation(value = "get bikes by user", notes = "x")
+
+
+    @POST
+    @ApiOperation(value = "create a new Product", notes = "We have a brand new product")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successful", response = Bike.class, responseContainer = "List of Bikes sorted by kms"),
-            @ApiResponse(code = 404, message = "UserNotFoundException"),
+            @ApiResponse(code = 201, message = "Successful", response=Product.class),
+            @ApiResponse(code = 500, message = "Validation Error")
 
     })
-    @Path("/getbikes/{idUser}")
+
+    @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response bikesByUser(@PathParam("idUser") String userId) {
-        LinkedList<Bike> bikes = null;
+    public Response newProduct(Product product) {
+
+        if (product.getName()==null || product.getPrice()==0)  return Response.status(500).entity(product).build();
+        this.tm.addProduct(product.name, product.description, product.price);
+        return Response.status(201).entity(product).build();
+    }
+
+}
+
+    @Path("/getItem/{idUser}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response itemsByUser(@PathParam("idUser") String id) {
+        LinkedList<Item> listaItem = null;
         try {
-            bikes = this.mb.bikesByUser(userId);
-            GenericEntity<LinkedList<Bike>> entity = new GenericEntity<LinkedList<Bike>>(bikes){};
+            listaItem = this.mb.itembyUser(id);
+            GenericEntity<LinkedList<Item>> entity = new GenericEntity<LinkedList<Bike>>(listaItem){};
             return Response.status(201).entity(entity).build();
         } catch (UserNotFoundException e) {
             e.printStackTrace();
