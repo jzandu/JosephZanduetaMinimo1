@@ -17,7 +17,6 @@ public class GameManagerImp implements GameManager{
     private User u1;
     private Item i1;
     private HashMap<String, User> users;
-    //private List<User> listaU;
     private List<Item> listItem;
 
     private GameManagerImp(){
@@ -25,7 +24,6 @@ public class GameManagerImp implements GameManager{
         listItem = new LinkedList<Item>();
         users = new HashMap<String, User>();
         listItem = new LinkedList<Item>();
-        //listaU = new ArrayList<User>(users.values());
     }
 
     /*El método de getInstance debe ser public*/

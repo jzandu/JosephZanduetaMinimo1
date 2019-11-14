@@ -1,18 +1,12 @@
 package dsa.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModelProperty;
 
 public class Item implements Comparable<Item>{
         //Attributes
         String name;
         int cantidad;
 
-        /*@JsonIgnore
-        @ApiModelProperty(hidden = true)
-        LinkedList<Clase2> bikesused;*/
-
-        //Empty constructor for json deserializer
+        //Empty constructor for json
         public Item(){
 
         }

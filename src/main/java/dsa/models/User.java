@@ -8,7 +8,7 @@ public class User {
     private String surname;
     private LinkedList<Item> itemList;
 
-    //Empty constructor for json deserializer
+    //Empty constructor for json
     public User(){
 
     }
@@ -20,9 +20,7 @@ public class User {
         this.surname= surname;
     }
 
-    /*public void addU(String n, String s){
-        User aux = new User(String n, String s);
-    }*/
+
 
     public String getName() {
         return name;
