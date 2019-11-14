@@ -14,15 +14,11 @@ public class GameManagerImp implements GameManager{
     private static GameManager instance;
     /* Creamos atributos privados para implementar Singleton */
     //Todos los atributos que generen los metodos
-    private User u1;
-    private Item i1;
     private HashMap<String, User> users;
     private List<Item> listItem;
 
     private GameManagerImp(){
-        u1 = new User();
         users = new HashMap<>();
-        listItem = new LinkedList<Item>();
     }
 
     /*El método de getInstance debe ser public*/
@@ -103,37 +99,44 @@ public class GameManagerImp implements GameManager{
         }else log.warn("Usuario no encontrado");
         return null;
     }
-    public void addUser1(User u1){
-        this.users.put(u1.getId(), u1);
-        log.info("Añadido nuevo usuario "+users);
-    }
+    /*public void addUser(Usuario u){
+        usuarios.put(u.getId(), new Usuario(u.getName(), u.getSurname()));
+        log.info("Usuario añadido: " + this.usuarios.get(u.getId()));
+    }*/
+
+
     @Override
     public void addUser(String id, String nombre, String apellido) {
         User u2 = new User(id, nombre, apellido);
-        this.users.put(u2.getId(),u2);
-        /*User result = users.get(u2);
+        User result = users.get(u2);
         if (result == null) {
             users.put(u2.getId(), u2);
             log.info("Añadido nuevo usuario "+users);
         } else {
             log.warn("The user " + u2.getName() + " existe");
 
-        }*/
+        }
     }
     @Override
     public void updateUser(User u) throws UserNotFoundException {
         User theUser = this.users.get(u);
-        if(theUser!=null){
+        if (theUser != null) {
             this.users.remove(u.getId());
             log.info("Actualizado: " + theUser);
             this.users.put(u.getId(), u);
-        }
-        else {
+        } else {
             log.warn("El usuario no existe");
             throw new UserNotFoundException();
 
+        }
+
     }
 
+    public HashMap<String, User> allUsers(){
+        HashMap<String, User> ret = new HashMap<>();
+        ret.putAll(this.users);
+
+        return ret;
     }
 
 

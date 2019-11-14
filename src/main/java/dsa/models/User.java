@@ -8,9 +8,6 @@ public class User {
     private String surname;
     private LinkedList<Item> itemList;
 
-    //Empty constructor for json
-    public User(){
-    }
 
     public User(String id, String name, String surname) {
         this.id = id;

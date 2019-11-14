@@ -1,7 +1,7 @@
 package dsa.models;
 
 
-public class Item implements Comparable<Item>{
+public class Item{
         //Attributes
         String name;
         int cantidad;
@@ -39,11 +39,7 @@ public class Item implements Comparable<Item>{
             Item i2 = new Item( name,cantidad);
     }
 
-        //añadir User, añadir...
-        @Override
-        public int compareTo(Item e2) {
-            return this.name.compareTo(e2.name);
-        }
+
     @Override
     public String toString() {
         return "Objeto [Name = " + name + ", cantidad = " + cantidad + "]";

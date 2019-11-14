@@ -3,6 +3,7 @@ package dsa.utils;
 import dsa.models.Item;
 import dsa.models.User;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface GameManager {
@@ -23,4 +24,6 @@ public interface GameManager {
     void clear();
 
     int sizeItemListUser();
+
+    public HashMap<String, User> allUsers();
 }

@@ -4,20 +4,20 @@ import dsa.utils.GameManagerImp;
 import dsa.utils.GameManager;
 
 import dsa.utils.UserNotFoundException;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
 
 public class TestImp {
+
     static GameManager p1;
 
     @Before
     public void setUp() throws UserNotFoundException {
+
         GameManager p1 = GameManagerImp.getInstance();
 
         Item i1;
@@ -38,19 +38,25 @@ public class TestImp {
 
 
     }
-    @After
-    public void tearDown(){
-        this.p1.clear();
+    @AfterClass
+    public static void tearDown(){
+        p1.clear();
     }
+
     @Test
-    public void addUser1test(){
-        User user1 = new User("1234", "Pedro", "Lopez");
-        this.p1.addUser1(this.user1);
+    public void sortByName() {
+        List<User> list1 = new LinkedList<>();
+        list1=this.p1.sortByName();
+        assertEquals(list1.get(0).getName(), "Ana", "Ana");
+        assertEquals(list1.get(1).getName(), "Juan", "Juan");
+        assertEquals(list1.get(2).getName(), "Pedro", "Pedro");
 
     }
+
+
     @Test
     public void addUserTest() {
-        this.p1.addUser("1111", "Ignacio", "Lopez");
+        p1.addUser("1111", "Ignacio", "Lopez");
         Assert.assertEquals(4, this.p1.sizeUsers());
     }
 
